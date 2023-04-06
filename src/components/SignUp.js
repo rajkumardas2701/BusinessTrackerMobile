@@ -7,8 +7,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {Puff} from 'react-native-loading-spinner-overlay';
-// import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-// import {SafeAreaView} from 'react-native-safe-area-context';
 import SessionContext from '../contexts/SessionContext';
 import {authCall} from '../utils/apiCalls';
 
@@ -49,14 +47,14 @@ const Signup = () => {
   }, [sessionDetails]);
 
   return (
-    <View>
+    <View style={signupStyles.formContainer}>
       <Text style={signupStyles.formHeading}>Sign up to Business Tracker</Text>
       <View style={signupStyles.form}>
         <View style={signupStyles.formElements}>
-          <Text style={signupStyles.formLabel}>Name:</Text>
+          <Text style={signupStyles.formLabel}>Name</Text>
           <TextInput
             style={signupStyles.formInput}
-            placeholder="Firstname lastname"
+            placeholder="First & last name"
             autoCapitalize="words"
             value={name}
             onChangeText={text => setName(text)}
@@ -65,7 +63,7 @@ const Signup = () => {
         </View>
 
         <View style={signupStyles.formElements}>
-          <Text style={signupStyles.formLabel}>Email:</Text>
+          <Text style={signupStyles.formLabel}>Email</Text>
           <TextInput
             style={signupStyles.formInput}
             placeholder="Enter valid email"
@@ -76,10 +74,10 @@ const Signup = () => {
         </View>
 
         <View style={signupStyles.formElements}>
-          <Text style={signupStyles.formLabel}>Phone:</Text>
+          <Text style={signupStyles.formLabel}>Phone</Text>
           <TextInput
             style={signupStyles.formInput}
-            placeholder="Indian Phone number"
+            placeholder="Indian phone number"
             keyboardType="phone-pad"
             value={phone}
             onChangeText={text => setPhone(text)}
@@ -88,7 +86,7 @@ const Signup = () => {
         </View>
 
         <View style={signupStyles.formElements}>
-          <Text style={signupStyles.formLabel}>Password:</Text>
+          <Text style={signupStyles.formLabel}>Password</Text>
           <TextInput
             style={signupStyles.formInput}
             placeholder="Password"
@@ -100,7 +98,7 @@ const Signup = () => {
         </View>
 
         <View style={signupStyles.formElements}>
-          <Text style={signupStyles.formLabel}>Confirm Password:</Text>
+          <Text style={signupStyles.formLabel}>Confirm Password</Text>
           <TextInput
             style={signupStyles.formInput}
             placeholder="Re-enter Password"
@@ -149,59 +147,83 @@ const Signup = () => {
 };
 
 const signupStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+  formContainer: {
+    width: 220,
+    marginTop: 40,
   },
-  title: {
+  formHeading: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginLeft: 50,
+    width: 300,
+    alignItems: 'center',
   },
-  input: {
+  form: {
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: {width: 0, height: 2},
+    shadowRadius: 2,
+    width: 350,
+  },
+  formElements: {
+    marginBottom: 10,
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 300,
     height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 20,
-    paddingHorizontal: 10,
-    borderRadius: 5,
   },
-  label: {
-    marginBottom: 5,
+  formLabel: {
+    fontSize: 16,
     fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  formInput: {
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
+    padding: 10,
+    fontSize: 16,
+    width: 165,
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 10,
   },
   button: {
-    backgroundColor: '#2196F3',
+    backgroundColor: 'blueviolet',
+    borderRadius: 5,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 5,
-    flex: 1,
-    marginLeft: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 150,
+  },
+  disabledButton: {
+    opacity: 0.5,
   },
   buttonText: {
     color: '#fff',
-    textAlign: 'center',
+    fontSize: 16,
     fontWeight: 'bold',
-  },
-  disabledButton: {
-    backgroundColor: 'gray',
-    opacity: 0.5,
-  },
-  loaderContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
   },
   apiMsg: {
     color: 'red',
+    marginTop: 10,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

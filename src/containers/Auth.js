@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
     marginLeft: 130,
+    width: 250,
   },
   formBtnSmall: {
     paddingVertical: 5,

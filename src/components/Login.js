@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
 import authCall from '../utils/apiCalls';
 
 const Login = () => {
@@ -15,7 +21,7 @@ const Login = () => {
       <Text style={styles.formHeading}>Login to Business Tracker</Text>
       <View style={styles.authForm}>
         <View style={styles.formRow}>
-          <Text style={styles.formLabel}>Phone:</Text>
+          <Text style={styles.formLabel}>Phone</Text>
           <TextInput
             value={phone}
             onChangeText={setPhone}
@@ -25,7 +31,7 @@ const Login = () => {
         </View>
 
         <View style={styles.formRow}>
-          <Text style={styles.formLabel}>Password:</Text>
+          <Text style={styles.formLabel}>Password</Text>
           <TextInput
             value={password}
             onChangeText={setPassword}
@@ -34,7 +40,10 @@ const Login = () => {
             style={styles.input}
           />
         </View>
-        <Button title="Login" onPress={handleLogin} />
+        {/* <Button title="Login" onPress={handleLogin} style={styles.formBtn} /> */}
+        <TouchableOpacity style={styles.button} onPress={handleLogin}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -90,6 +99,19 @@ const styles = StyleSheet.create({
     marginLeft: 120,
     marginTop: 40,
     fontSize: 20,
+  },
+  button: {
+    backgroundColor: 'blueviolet',
+    borderRadius: 5,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
