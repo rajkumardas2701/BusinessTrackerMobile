@@ -5,10 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
-import {Puff} from 'react-native-loading-spinner-overlay';
 import SessionContext from '../contexts/SessionContext';
-import {authCall} from '../utils/apiCalls';
+import authCall from '../utils/apiCalls';
 
 const Signup = () => {
   const [phone, setPhone] = useState('');
@@ -138,7 +138,7 @@ const Signup = () => {
 
         {showAuthLoader && (
           <View style={signupStyles.loaderContainer}>
-            <Puff color="blueviolet" height={60} width={60} />
+            <ActivityIndicator color="blueviolet" size="large" />
           </View>
         )}
       </View>
@@ -221,9 +221,13 @@ const signupStyles = StyleSheet.create({
     textAlign: 'center',
   },
   loaderContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    zIndex: 9999,
+    position: 'absolute',
+    top: '110%',
+    left: '50%',
   },
 });
 

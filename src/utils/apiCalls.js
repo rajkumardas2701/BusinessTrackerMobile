@@ -1,12 +1,12 @@
 import axios from 'axios';
 import apiURL from '../constants/constant';
-import {AsyncStorage} from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const authCall = async user => {
-  //   setShowAuthLoader(true);
+const authCall = async (user, setSessionDetails, type, setShowAuthLoader) => {
+  setShowAuthLoader(true);
   try {
     const result = await axios.post(
-      `${apiURL}/auth/login`,
+      `${apiURL}/auth/${type}`,
       {user},
       {withCredentials: true},
     );
@@ -18,12 +18,12 @@ const authCall = async user => {
         user: result.data.user,
       }),
     );
-    // setSessionDetails({
-    //   logged_in: result.data.logged_in,
-    //   user: result.data.user,
-    //   message: result.data.message,
-    // });
-    // setShowAuthLoader(false);
+    setSessionDetails({
+      logged_in: result.data.logged_in,
+      user: result.data.user,
+      message: result.data.message,
+    });
+    setShowAuthLoader(false);
   } catch (error) {
     AsyncStorage.setItem(
       'authToken',
@@ -32,12 +32,12 @@ const authCall = async user => {
         token: error.response ? error.response.data.token : '',
       }),
     );
-    // setSessionDetails({
-    //   logged_in: error.response ? error.response.data.logged_in : false,
-    //   user: error.response ? error.response.data.user : {},
-    //   message: error.response ? error.response.data.message : error.message,
-    // });
-    // setShowAuthLoader(false);
+    setSessionDetails({
+      logged_in: error.response ? error.response.data.logged_in : false,
+      user: error.response ? error.response.data.user : {},
+      message: error.response ? error.response.data.message : error.message,
+    });
+    setShowAuthLoader(false);
   }
 };
 

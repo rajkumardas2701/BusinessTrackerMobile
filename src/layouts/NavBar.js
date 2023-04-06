@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'blueviolet',
     height: 50,
+    paddingRight: 40,
   },
   navLogo: {
     fontSize: 18,
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
   userGreet: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 40,
+    paddingRight: 10,
   },
   navbarName: {
     fontWeight: 'bold',

@@ -11,8 +11,7 @@ import {ScrollView, StyleSheet, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SessionContext from '../contexts/SessionContext';
 import Auth from '../containers/Auth';
-
-// import Dashboard from '../containers/Dashboard';
+import Dashboard from '../containers/Dashboard';
 
 const App = () => {
   const [sessionDetails, setSessionDetails] = useState({
@@ -25,16 +24,23 @@ const App = () => {
       : {},
     message: '',
   });
+  const [showAuthLoader, setShowAuthLoader] = useState(false);
   return (
     <ScrollView style={styles.appContainer}>
       <SessionContext.Provider
         value={{
           sessionDetails,
           setSessionDetails,
+          showAuthLoader,
+          setShowAuthLoader,
         }}>
         <NavBar />
         <View style={styles.loginform}>
-          <Auth />
+          {AsyncStorage.getItem('authToken') && sessionDetails.logged_in ? (
+            <Dashboard />
+          ) : (
+            <Auth />
+          )}
         </View>
       </SessionContext.Provider>
     </ScrollView>

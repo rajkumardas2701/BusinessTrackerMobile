@@ -1,21 +1,37 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
+import SessionContext from '../contexts/SessionContext';
 import authCall from '../utils/apiCalls';
 
 const Login = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const {sessionDetails, setSessionDetails, showAuthLoader, setShowAuthLoader} =
+    useContext(SessionContext);
   const handleLogin = e => {
     const user = {phone, password};
-    authCall(user);
+    authCall(user, setSessionDetails, 'login', setShowAuthLoader);
     e.preventDefault();
   };
+  const handleFormCancel = e => {
+    setPhone('');
+    setPassword('');
+    e.preventDefault();
+  };
+  useEffect(() => {
+    setShowMessage(true);
+    setTimeout(() => {
+      setShowMessage(false);
+    }, 5000);
+  }, [sessionDetails]);
   return (
     <View style={styles.container}>
       <Text style={styles.formHeading}>Login to Business Tracker</Text>
@@ -40,10 +56,22 @@ const Login = () => {
             style={styles.input}
           />
         </View>
-        {/* <Button title="Login" onPress={handleLogin} style={styles.formBtn} /> */}
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        <View style={styles.formRow}>
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleFormCancel}>
+            <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
+        {showMessage && sessionDetails.message !== '' && (
+          <Text style={styles.apiMsg}>{sessionDetails.message}</Text>
+        )}
+        {showAuthLoader && (
+          <View style={styles.authLoaderContainer}>
+            <ActivityIndicator color="blueviolet" size="large" />
+          </View>
+        )}
       </View>
     </View>
   );
@@ -55,7 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   container: {
     flex: 1,
@@ -107,11 +135,27 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
+    width: 110,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  authLoaderContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    zIndex: 9999,
+    position: 'absolute',
+    top: '100%',
+    left: '50%',
+  },
+  apiMsg: {
+    color: 'red',
+    position: 'absolute',
+    top: '110%',
+    left: '20%',
   },
 });
 
