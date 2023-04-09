@@ -41,6 +41,7 @@ const App = () => {
           ) : (
             <Auth />
           )}
+          {console.log(AsyncStorage.getItem('authToken'))}
         </View>
       </SessionContext.Provider>
     </ScrollView>
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     width: 440,
+    backgroundColor: 'white',
   },
   loginform: {
     maxWidth: 280,

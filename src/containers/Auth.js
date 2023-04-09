@@ -27,20 +27,20 @@ const Auth = () => {
       {loginType ? <Login /> : <Signup />}
       {loginType ? (
         <View style={styles.switchAuth}>
-          <Text>Don&apos;t have an account?</Text>
+          <Text style={styles.text}>Don&apos;t have an account?</Text>
           <TouchableOpacity
             style={styles.formBtnSmall}
             onPress={switchAuthType}>
-            <Text>Sign Up</Text>
+            <Text style={styles.text}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       ) : (
         <View style={styles.switchAuth}>
-          <Text>Already have an account?</Text>
+          <Text style={styles.text}>Already have an account?</Text>
           <TouchableOpacity
             style={styles.formBtnSmall}
             onPress={switchAuthType}>
-            <Text>Login</Text>
+            <Text style={styles.text}>Login</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 130,
     width: 250,
+    color: 'black',
   },
   formBtnSmall: {
     paddingVertical: 5,
@@ -68,6 +69,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: '#ccc',
     marginLeft: 20,
+  },
+  text: {
+    color: 'gray',
   },
 });
 

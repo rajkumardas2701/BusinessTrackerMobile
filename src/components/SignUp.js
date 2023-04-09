@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import SessionContext from '../contexts/SessionContext';
-import authCall from '../utils/apiCalls';
+import {authCall} from '../utils/apiCalls';
 
 const Signup = () => {
   const [phone, setPhone] = useState('');
@@ -55,6 +55,7 @@ const Signup = () => {
           <TextInput
             style={signupStyles.formInput}
             placeholder="First & last name"
+            placeholderTextColor="gray"
             autoCapitalize="words"
             value={name}
             onChangeText={text => setName(text)}
@@ -67,6 +68,7 @@ const Signup = () => {
           <TextInput
             style={signupStyles.formInput}
             placeholder="Enter valid email"
+            placeholderTextColor="gray"
             keyboardType="email-address"
             value={email}
             onChangeText={text => setEmail(text)}
@@ -78,6 +80,7 @@ const Signup = () => {
           <TextInput
             style={signupStyles.formInput}
             placeholder="Indian phone number"
+            placeholderTextColor="gray"
             keyboardType="phone-pad"
             value={phone}
             onChangeText={text => setPhone(text)}
@@ -90,6 +93,7 @@ const Signup = () => {
           <TextInput
             style={signupStyles.formInput}
             placeholder="Password"
+            placeholderTextColor="gray"
             secureTextEntry={true}
             value={password}
             onChangeText={text => setPassword(text)}
@@ -102,6 +106,7 @@ const Signup = () => {
           <TextInput
             style={signupStyles.formInput}
             placeholder="Re-enter Password"
+            placeholderTextColor="gray"
             secureTextEntry={true}
             value={confirmPassword}
             onChangeText={text => {
@@ -158,6 +163,7 @@ const signupStyles = StyleSheet.create({
     marginLeft: 50,
     width: 300,
     alignItems: 'center',
+    color: 'gray',
   },
   form: {
     padding: 20,
@@ -183,14 +189,16 @@ const signupStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: 'gray',
   },
   formInput: {
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: 5,
     padding: 10,
-    fontSize: 16,
+    fontSize: 14,
     width: 165,
+    color: 'gray',
   },
   buttonContainer: {
     flexDirection: 'row',

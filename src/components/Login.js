@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import SessionContext from '../contexts/SessionContext';
-import authCall from '../utils/apiCalls';
+import {authCall} from '../utils/apiCalls';
+// import text from '../styles/commonStyles';
 
 const Login = () => {
   const [phone, setPhone] = useState('');
@@ -42,6 +43,7 @@ const Login = () => {
             value={phone}
             onChangeText={setPhone}
             placeholder="Enter phone number"
+            placeholderTextColor="gray"
             style={styles.input}
           />
         </View>
@@ -52,6 +54,7 @@ const Login = () => {
             value={password}
             onChangeText={setPassword}
             placeholder="Enter your password"
+            placeholderTextColor="gray"
             secureTextEntry={true}
             style={styles.input}
           />
@@ -89,7 +92,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
     width: 400,
   },
   authForm: {
@@ -117,16 +119,19 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: 170,
     paddingHorizontal: 10,
+    color: 'black',
   },
   formLabel: {
     fontWeight: '900',
+    color: 'gray',
   },
   formHeading: {
     fontFamily: 'Helvetica Neue',
-    fontWeight: 900,
     marginLeft: 120,
     marginTop: 40,
     fontSize: 20,
+    color: 'gray',
+    fontWeight: 'bold',
   },
   button: {
     backgroundColor: 'blueviolet',
