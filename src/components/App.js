@@ -41,7 +41,6 @@ const App = () => {
           ) : (
             <Auth />
           )}
-          {console.log(AsyncStorage.getItem('authToken'))}
         </View>
       </SessionContext.Provider>
     </ScrollView>

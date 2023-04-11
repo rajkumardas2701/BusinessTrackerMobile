@@ -160,7 +160,9 @@ const styles = StyleSheet.create({
     color: 'red',
     position: 'absolute',
     top: '110%',
-    left: '20%',
+    width: 300,
+    textAlign: 'center',
+    fontSize: 20,
   },
 });
 

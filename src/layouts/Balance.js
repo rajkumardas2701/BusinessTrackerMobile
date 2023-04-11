@@ -27,12 +27,13 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
     alignItems: 'center',
-    width: 350,
+    width: 325,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginLeft: 140,
-    marginTop: 5,
+    marginLeft: 130,
+    marginTop: 10,
+    marginBottom: 10,
   },
   redBackground: {
     backgroundColor: 'red',

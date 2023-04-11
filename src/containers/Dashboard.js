@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+  Easing,
+} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {fetchDeals, fetchTxs} from '../utils/apiCalls';
 import DashboardContext from '../contexts/DashboardContext';
@@ -7,9 +14,9 @@ import SideTransactions from './SideTransactions';
 import Balance from '../layouts/Balance';
 import SessionContext from '../contexts/SessionContext';
 // import ExcelExport from '../components/ExportExcel';
-import CreateDeal from '../components/CreateDeal';
-import CreateTransaction from '../components/CreateTransaction';
-import EditTransaction from '../components/EditTransaction';
+// import CreateDeal from '../components/CreateDeal';
+// import CreateTransaction from '../components/CreateTransaction';
+// import EditTransaction from '../components/EditTransaction';
 
 const Dashboard = () => {
   const [deals, setDeals] = useState([]);
@@ -42,10 +49,11 @@ const Dashboard = () => {
       setShowApiMsgLoader,
     );
   }, [setSessionDetails]);
-  // const handleSwitch = e => {
-  //   setShowDeals(!showDeals);
-  //   e.preventDefault();
-  // };
+  const handleSwitch = e => {
+    // console.log(e);
+    setShowDeals(!showDeals);
+    e.preventDefault();
+  };
   // const handleCreateDeal = e => {
   //   setShowCreateDeal(!showCreateDeal);
   //   e.preventDefault();
@@ -57,7 +65,11 @@ const Dashboard = () => {
   return (
     <View style={styles.dashboardContainer}>
       {(showMessage || showApiMsgLoader) && apiMsg !== '' && (
-        <Text style={[styles.dashboardMsg]}>{apiMsg}</Text>
+        // <Animated.View style={animatedStyles} />
+        <Text style={[styles.dashboardMsg, {color: msgColor}]}>
+          {apiMsg ? apiMsg : 'Api Msgs here'}
+        </Text>
+        // </Animated.View>
       )}
       <DashboardContext.Provider
         value={{
@@ -80,49 +92,32 @@ const Dashboard = () => {
           setShowDeals,
         }}>
         <Balance />
-        {/* {console.log(typeof styles.msgApiColor.msg_err)} */}
-        {/* <View style={styles.dealTransactionsSwitchContainerSmall}>
+        <View style={styles.dealsTransactionsSwitchContainer}>
           <View style={styles.dealsTransactionsSwitch}>
             <TouchableOpacity
               style={[
-                styles.showDealsButton,
-                {
-                  backgroundColor: !showDeals ? 'blue' : 'white',
-                  borderWidth: !showDeals ? 0 : 1,
-                },
+                styles.switchButton,
+                showDeals ? styles.activeButton : null,
               ]}
               onPress={handleSwitch}>
-              <Text
-                style={[
-                  styles.showDealsButtonText,
-                  {color: !showDeals ? 'white' : 'blue', fontWeight: 'bold'},
-                ]}>
+              <Text style={styles.switchButtonText}>
                 Deals and Transactions
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[
-                styles.showDealsButton,
-                {
-                  backgroundColor: showDeals ? 'blue' : 'white',
-                  borderWidth: showDeals ? 0 : 1,
-                },
+                styles.switchButton,
+                !showDeals ? styles.activeButton : null,
               ]}
               onPress={handleSwitch}>
-              <Text
-                style={[
-                  styles.showDealsButtonText,
-                  {color: showDeals ? 'white' : 'blue', fontWeight: 'bold'},
-                ]}>
-                Other Transactions
-              </Text>
+              <Text style={styles.switchButtonText}>Other Transactions</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.dealTransactionsContainer}>
-            {showDeals ? <Deals /> : <SideTransactions />}
+            {showDeals ? null : <SideTransactions />}
           </View>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={handleCreateDeal}
           style={styles.createDealButton}>
           <Text style={styles.createDealButtonText}>Create Deal</Text>
@@ -152,7 +147,6 @@ const Dashboard = () => {
 const styles = StyleSheet.create({
   dashboardContainer: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -161,15 +155,15 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     textAlign: 'center',
     fontWeight: 'bold',
-    color: 'red',
+    position: 'absolute',
+    top: -20,
+    left: 10,
+    zIndex: 9999,
+    width: 400,
+    backgroundColor: 'white',
   },
-  dealTransactionsLarge: {
-    flexDirection: 'row',
-    width: '100%',
-    height: '50%',
-  },
-  dealTransactionsSwitchContainerSmall: {
-    width: '100%',
+  dealsTransactionsSwitchContainer: {
+    width: 400,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -177,58 +171,24 @@ const styles = StyleSheet.create({
   dealsTransactionsSwitch: {
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%',
-    height: '10%',
-    marginTop: 10,
-  },
-  showDealsFalse: {
-    width: '50%',
-    height: '100%',
-    backgroundColor: '#fff',
-    color: 'blue',
-    fontWeight: 'bold',
-    borderWidth: 0,
-  },
-  showDealsTrue: {
-    width: '50%',
-    height: '100%',
-    backgroundColor: '#fff',
-    color: 'blue',
-    fontWeight: 'bold',
-    borderWidth: 0,
-  },
-  dealTransactionsContainer: {
-    width: '100%',
-    height: '40%',
-    marginTop: 10,
-  },
-  createDeal: {
-    backgroundColor: '#fff',
-    color: 'blue',
-    fontWeight: 'bold',
-    width: '100%',
+    width: 80,
     height: 40,
-    marginVertical: 10,
-    borderWidth: 0,
+    marginLeft: 140,
   },
-  createTransaction: {
-    backgroundColor: '#fff',
-    color: 'blue',
-    fontWeight: 'bold',
-    width: '100%',
-    height: 40,
-    marginVertical: 10,
-    borderWidth: 0,
+  switchButton: {
+    width: 220,
+    borderWidth: 2,
+    borderColor: 'black',
+    backgroundColor: 'white',
   },
-  excelExport: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+  switchButtonText: {
+    textAlign: 'center',
+    fontSize: 15,
+    fontWeight: 800,
+    marginTop: 7,
   },
-  msgApiColor: {
-    msg_ok: 'green',
-    msg_err: 'red',
-    msg_load: 'orange',
+  activeButton: {
+    backgroundColor: 'cyan',
   },
 });
 

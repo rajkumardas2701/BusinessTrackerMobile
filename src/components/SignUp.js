@@ -224,9 +224,11 @@ const signupStyles = StyleSheet.create({
   },
   apiMsg: {
     color: 'red',
-    marginTop: 10,
-    fontSize: 16,
+    position: 'absolute',
+    top: '107%',
+    width: 350,
     textAlign: 'center',
+    fontSize: 20,
   },
   loaderContainer: {
     alignItems: 'center',
