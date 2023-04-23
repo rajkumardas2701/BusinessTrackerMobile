@@ -114,7 +114,7 @@ const Dashboard = () => {
             </TouchableOpacity>
           </View>
           <View style={styles.dealTransactionsContainer}>
-            {showDeals ? null : <SideTransactions />}
+            {showDeals ? <Deals /> : <SideTransactions />}
           </View>
         </View>
         {/* <TouchableOpacity

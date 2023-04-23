@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import DashboardContext from '../contexts/DashboardContext';
-// import Deal from '../components/Deal';
+import Deal from '../components/Deal';
 // import DealTransactions from './DealTransactions';
 import {
   filterDealTransactions,
@@ -23,28 +23,24 @@ const Deals = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Deals related Transactions</Text>
       <View style={styles.dealsContainer}>
-        <Text style={styles.dealsHeader}>Deals</Text>
-        <View style={styles.dealsList}>
-          {/* {
-              (deals && deals.length)
-                ? deals.map((deal) => (
-                  <Deal
-                    key={deal.id}
-                    deal={deal}
-                    setDealID={setDealID}
-                    showDeleteWarning={showDeleteWarning}
-                    setShowDeleteWarning={setShowDeleteWarning}
-                  />
-                ))
-                : (
-                  <View style={styles.loader}>
-                    <Text>No Deals to show yet</Text>
-                  </View>
-                )
-            } */}
-        </View>
+        <ScrollView style={styles.dealsList} horizontal={true}>
+          {deals && deals.length ? (
+            deals.map(deal => (
+              <Deal
+                key={deal.id}
+                deal={deal}
+                setDealID={setDealID}
+                // showDeleteWarning={showDeleteWarning}
+                // setShowDeleteWarning={setShowDeleteWarning}
+              />
+            ))
+          ) : (
+            <View style={styles.loader}>
+              <Text>No Deals to show yet</Text>
+            </View>
+          )}
+        </ScrollView>
       </View>
       {/* <View style={styles.transactionsContainer}>
         <DealTransactions dealTransacts={dealTransacts} dealName={dealName} />
@@ -56,8 +52,9 @@ const Deals = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // padding:,
+    width: 430,
+    marginLeft: 135,
+    paddingRight: 5,
   },
   header: {
     fontSize: 20,
@@ -73,8 +70,11 @@ const styles = StyleSheet.create({
     // marginBottom: 10,
   },
   dealsList: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    // display: 'flex',
+    // flexDirection: 'row',
+    // // flexWrap: 'wrap',
+    // overflow: 'scroll',
+    // hieght: 200,
   },
   loader: {
     flex: 1,

@@ -1,25 +1,46 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import DashboardContext from '../contexts/DashboardContext';
 import {getBalance} from '../helper_functions/helperMethods';
+import {fetchTxs} from '../utils/apiCalls';
 
 const Balance = () => {
-  const {txs} = useContext(DashboardContext);
+  const {
+    txs,
+    setTxs,
+    setApiMsg,
+    setShowMessage,
+    setMsgColor,
+    setShowApiMsgLoader,
+  } = useContext(DashboardContext);
   const [balance, setBalance] = useState(0.0);
 
   useEffect(() => {
     getBalance(txs, setBalance);
   }, [txs]);
 
+  const handleClick = e => {
+    fetchTxs(
+      setTxs,
+      setApiMsg,
+      setShowMessage,
+      setMsgColor,
+      setShowApiMsgLoader,
+    );
+    // getBalance(txs, setBalance);
+    e.preventDefault();
+  };
+
   return (
-    <View
+    <TouchableOpacity
       style={[
         styles.container,
         balance < 0 ? styles.redBackground : styles.greenBackground,
-      ]}>
+      ]}
+      onPress={handleClick}>
       <Text style={styles.label}>Balance:</Text>
       <Text style={styles.balanceText}>INR {balance.toLocaleString()}/-</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

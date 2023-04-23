@@ -104,12 +104,11 @@ const styles = StyleSheet.create({
     // marginRight: 10,
   },
   editButtonSmall: {
-    flex: 0.3,
+    flex: 0.4,
     justifyContent: 'center',
     alignItems: 'center',
     width: 30,
     height: 30,
-    // marginRight: 10,
   },
   editIconSmall: {
     color: 'blue',
