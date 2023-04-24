@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 800,
     marginTop: 7,
+    color: 'black',
   },
   activeButton: {
     backgroundColor: 'cyan',

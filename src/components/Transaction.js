@@ -58,11 +58,11 @@ const Transaction = ({
       <View style={styles.row2}>
         <View style={styles.row2Item}>
           <Text style={styles.boldText}>Action by:</Text>
-          <Text>{sTx.action_by}</Text>
+          <Text style={styles.textValue}>{sTx.action_by}</Text>
         </View>
         <View style={styles.row2Item}>
           <Text style={styles.boldText}>Remark:</Text>
-          <Text>{sTx.remark}</Text>
+          <Text style={styles.textValue}>{sTx.remark}</Text>
         </View>
       </View>
     </View>
@@ -92,13 +92,15 @@ const styles = StyleSheet.create({
   dateSmall: {
     flex: 0.6,
     fontWeight: 800,
+    color: 'gray',
   },
   amountSmall: {
     flex: 0.5,
     fontWeight: 800,
+    color: 'gray',
   },
   sendReceiveSmall: {
-    flex: 1,
+    flex: 0.7,
     textAlign: 'center',
     // paddingLeft: 30,
     // marginRight: 10,
@@ -131,8 +133,13 @@ const styles = StyleSheet.create({
     // marginRight: 10,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontWeight: '900',
     marginRight: 10,
+    color: 'gray',
+  },
+  textValue: {
+    color: 'maroon',
+    fontWeight: 'bold',
   },
 });
 

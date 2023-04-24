@@ -198,9 +198,11 @@ const styles = StyleSheet.create({
   },
   dealHeadText: {
     fontWeight: 900,
+    color: 'brown',
   },
   dealContentValue: {
     fontFamily: 'serif',
+    color: 'black',
   },
   dealHead: {
     justifyContent: 'space-around',
@@ -231,6 +233,7 @@ const styles = StyleSheet.create({
   },
   dealContentLabel: {
     fontWeight: 'bold',
+    color: 'gray',
   },
   dealBalanceStyle: {
     width: '80%',

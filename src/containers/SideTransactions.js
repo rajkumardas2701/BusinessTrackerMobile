@@ -16,18 +16,18 @@ const SideTransactions = () => {
 
   return (
     <View style={styles.sideTransactionsContainer}>
-      <ScrollView style={styles.sideTransactionsList}>
-        <View style={styles.sideTransactionsTableHead}>
-          <View style={styles.sideTransactionsTableHeadContent}>
-            <Text style={styles.transactionFirstFour}>Date</Text>
-            <Text style={styles.transactionFirstFour}>Amount</Text>
-            <Text style={styles.transactionFirstFourSentReceive}>
-              Sent/Received
-            </Text>
-            <Text style={styles.editDelete}>Edit</Text>
-            <Text style={styles.editDelete}>Delete</Text>
-          </View>
+      <View style={styles.sideTransactionsTableHead}>
+        <View style={styles.sideTransactionsTableHeadContent}>
+          <Text style={styles.transactionFirstFour}>Date</Text>
+          <Text style={styles.transactionFirstFour}>Amount</Text>
+          <Text style={styles.transactionFirstFourSentReceive}>
+            Sent/Received
+          </Text>
+          <Text style={styles.editDelete}>Edit</Text>
+          <Text style={styles.editDelete}>Delete</Text>
         </View>
+      </View>
+      <ScrollView style={styles.sideTransactionsList}>
         <View style={styles.sideTransactionsTableBody}>
           {sTxs && sTxs.length ? (
             sTxs.map(sTx => (
@@ -65,15 +65,20 @@ const styles = StyleSheet.create({
     paddingRight: 5,
   },
   sideTransactionsList: {
-    height: 75 * vh,
+    height: 78 * vh,
+    postion: 'absolute',
+    top: 30,
   },
   sideTransactionsTableHead: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: 'black',
-    paddingBottom: 5,
-    marginBottom: 5,
-    // marginLeft: 10,
+    alignContent: 'center',
+    paddingTop: 5,
+    position: 'absolute',
+    width: '100%',
+    height: 30,
+    zIndex: 999,
   },
   sideTransactionsTableHeadContent: {
     flex: 1,
@@ -86,12 +91,14 @@ const styles = StyleSheet.create({
     fontWeight: 900,
     width: 5,
     textAlign: 'center',
+    color: 'blue',
   },
   transactionFirstFourSentReceive: {
     // Add styles for transaction-first-four-sent-receive
     flex: 2,
     fontWeight: 900,
     textAlign: 'center',
+    color: 'blue',
   },
   transactionFirstFourSmall: {
     // Add styles for transaction-first-four-small
@@ -113,9 +120,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 900,
     fontSize: 14,
+    color: 'blue',
   },
   sideTransactionsTableBody: {
-    // Add styles for side-transactions-table-body
+    // height: 700,
   },
   noTransactionsText: {
     // Add styles for noTransactionsText
